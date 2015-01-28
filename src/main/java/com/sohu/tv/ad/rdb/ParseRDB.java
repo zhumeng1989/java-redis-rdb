@@ -222,17 +222,6 @@ public class ParseRDB {
         return false;
     }
 
-    private int peekType() {
-        byte[] tt = new byte[1];
-        if (readBytes(tt, 0, -1)) {
-            int t = (0x00ff & tt[0]);
-            if (t <= 4 || (t >= 9 && t <= 13) || t >= 252){
-                return t;
-            }
-        }
-        return -1;
-    }
-
     /* 获取过期时间, byte数组需转换为Long */
     byte[] processTime(int type) {
     	int timelen = (type == REDIS_EXPIRETIME_FC) ? 8 : 4;
